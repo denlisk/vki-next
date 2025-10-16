@@ -10,6 +10,7 @@ interface Props {
 const Student = ({ student, onDelete }: Props): React.ReactElement => {
   const onDeleteHandler = (): void => {
     onDelete(student.id);
+    student.isDeleted = true;
   };
 
   return (

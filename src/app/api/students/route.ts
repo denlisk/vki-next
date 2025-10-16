@@ -1,5 +1,6 @@
 import { addStudentDb, getStudentsDb } from '@/db/studentDb';
 import StudentInterface from '@/types/StudentInterface';
+import { NextApiRequest } from 'next';
 import { NextRequest } from 'next/server';
 
 export async function GET(): Promise<Response> {

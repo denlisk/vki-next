@@ -1,5 +1,5 @@
 import type StudentInterface from '@/types/StudentInterface';
-import styles from './Student.module.scss';
+import styles from './AddStudent.module.scss';
 import Link from 'next/link';
 import { Form, useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { addStudentApi } from '@/api/studentsApi';
@@ -29,16 +29,16 @@ const AddStudent = (): React.ReactElement => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Имя</label>
+    <form className={`${styles.AddStudent}`} onSubmit={handleSubmit(onSubmit)}>
+      <span>Имя</span>
       <input type="text" {...register('fName', { required: true })} />
-      <label>Фамилия</label>
+      <span>Фамилия</span>
       <input type="text" {...register('lName', { required: true })} />
-      <label>Отчество</label>
+      <span>Отчество</span>
       <input type="text" {...register('sName', { required: true })} />
-      <label>Группа</label>
+      <span>Группа</span>
       <input type="nubmer" {...register('gId', { required: true })} />
-      <input type="submit" />
+      <input value="asd" type="submit" />
     </form>
   );
 };

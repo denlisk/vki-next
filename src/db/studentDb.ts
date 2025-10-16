@@ -38,7 +38,7 @@ export const deleteStudentDb = async (studentId: number): Promise<number> => {
   const db = new sqlite3.Database(process.env.DB ?? './db/vki-web.db');
 
   await new Promise((resolve, reject) => {
-    db.run('DELETE FROM students WHERE id=?', [studentId], (err) => {
+    db.run('UPDATE students SET isDeleted = 1 WHERE id=?', [studentId], (err) => {
       if (err) {
         reject(err);
         db.close();
@@ -88,7 +88,7 @@ export const addStudentDb = async (student: StudentInterface): Promise<StudentIn
   const db = new sqlite3.Database(process.env.DB ?? './db/vki-web.db');
 
   await new Promise((resolve, reject) => {
-    db.run(`INSERT INTO students (first_name, last_name, middle_name, groupId) VALUES ${student.first_name}, ${student.last_name}, ${student.middle_name}, ${student.groupId}`, [], (err) => {
+    db.run(`INSERT INTO students (first_name, last_name, middle_name, groupId) VALUES ('${student.first_name}', '${student.last_name}', '${student.middle_name}', '${student.groupId}')`, [], (err) => {
       if (err) {
         reject(err);
         db.close();
