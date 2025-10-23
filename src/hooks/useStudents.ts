@@ -77,11 +77,14 @@ const useStudents = (): StudentsHookInterface => {
       await queryClient.cancelQueries({ queryKey: ['students'] });
       // получаем данные из TanStackQuery
       const previousStudents = queryClient.getQueryData<StudentInterface[]>(['students']);
-      let updatedStudents = [...(previousStudents ?? [])];
+      const updatedStudents = [...(previousStudents ?? [])];
 
       if (!updatedStudents) return;
 
-      updatedStudents = updatedStudents.concat(newStudent);
+      updatedStudents.push({
+        ...newStudent,
+        isNew: true,
+      });
       queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudents);
 
       return { previousStudents, updatedStudents };

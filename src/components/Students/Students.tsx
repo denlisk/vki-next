@@ -7,7 +7,9 @@ import Link from 'next/link';
 import Student from './Student/Student';
 import { deleteStudentApi } from '@/api/studentsApi';
 import { useMutation } from '@tanstack/react-query';
-import AddStudent from './AddStudent/AddStudent';
+import AddStudent, { FormFields } from './AddStudent/AddStudent';
+import { v4 as uuidv4 } from 'uuid';
+
 const Students = (): React.ReactElement => {
   const { students, addStudentMutate, deleteStudentMutate } = useStudents();
 
@@ -17,8 +19,12 @@ const Students = (): React.ReactElement => {
     });
   }
 
-  const addStudent = (student: StudentInterface): void => {
-    addStudentMutate(student);
+  const addStudent = (studentFormField: FormFields): void => {
+    addStudentMutate({
+      id: -1,
+      ...studentFormField,
+      uuid: uuidv4(),
+    });
   }
 
   const onDeleteHandler = (studentId: number): void => {
@@ -27,20 +33,23 @@ const Students = (): React.ReactElement => {
 
   return (
     <>
-      <AddStudent />
+      <AddStudent onAdd={addStudent} />
       <table className={styles.Students}>
         <thead>
           <tr>
+            <th>Id</th>
+            <th>UUID</th>
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
             <th>Номер группы</th>
+            <th>Контакты</th>
             <th>Действия</th>
           </tr>
         </thead>
         <tbody>
           {students.map((student: StudentInterface) => (
-            <Student key={student.id} onDelete={onDeleteHandler} student={student} />
+            <Student key={student.id || student.uuid} onDelete={onDeleteHandler} student={student} />
           ))}
           <tr>
             <td colSpan={5}>

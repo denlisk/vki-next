@@ -175,9 +175,9 @@ export const getRandomFio = (): FioInterface => {
   const middle_name = capitalize(part3[getRandomNumber(part3.length)]);
 
   return {
-    first_name: first_name,
-    last_name: last_name,
-    middle_name: middle_name,
+    firstName: first_name,
+    lastName: last_name,
+    middleName: middle_name,
   };
 };
 

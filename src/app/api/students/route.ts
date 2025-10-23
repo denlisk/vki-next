@@ -15,6 +15,7 @@ export async function GET(): Promise<Response> {
 
 export async function POST(req: NextRequest): Promise<Response> {
   const student = await req.json();
+  delete student['id'];
   await addStudentDb(student);
 
   return new Response(JSON.stringify(student), {

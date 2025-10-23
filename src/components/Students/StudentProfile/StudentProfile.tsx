@@ -10,9 +10,9 @@ const StudentProfile = (student: StudentInterface): React.ReactElement => {
     <article className={`${styles.Student}
       ${student.isDeleted ? ['--isDeleted'] : ''}`}
     >
-      {student.last_name}
-      {student.first_name}
-      {student.middle_name}
+      {student.lastName}
+      {student.firstName}
+      {student.middleName}
       {student.groupId}
       <button onClick={onDeleteHandler}>Удалить</button>
     </article>

@@ -14,18 +14,27 @@ const Student = ({ student, onDelete }: Props): React.ReactElement => {
   };
 
   return (
-    <tr className={`${styles.Student} ${student.isDeleted ? styles['--isDeleted'] : ''} `}>
+    <tr className={`${styles.Student} ${student.isDeleted ? '--isDeleted' : student.isNew ? '--isNew' : ''} `}>
       <td>
-        {student.last_name}
+        {student.id}
       </td>
       <td>
-        {student.first_name}
+        {student.uuid}
       </td>
       <td>
-        {student.middle_name}
+        {student.lastName}
+      </td>
+      <td>
+        {student.firstName}
+      </td>
+      <td>
+        {student.middleName}
       </td>
       <td>
         {student.groupId}
+      </td>
+      <td>
+        {student.contacts}
       </td>
       <td>
         <Link href={`/students/${student.id}`}>Открыть</Link>
