@@ -1,7 +1,7 @@
 interface FioInterface {
   firstName: string;
   lastName: string;
-  middleName: string;
+  middleName?: string;
 };
 
 export default FioInterface;

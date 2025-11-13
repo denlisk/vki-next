@@ -45,14 +45,20 @@ const useStudents = (): StudentsHookInterface => {
       // обновляем данные в TanStackQuery
       queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudents);
 
+      console.log('deleteStudentMutate: Мутация', previousStudents, updatedStudents);
+      debugger;
+
       return { previousStudents, updatedStudents };
     },
     onError: (err, variables, context) => {
-      console.log('>>> deleteStudentMutate  err', err);
+      console.log('deleteStudentMutate: Ошибка', err);
+      debugger;
       queryClient.setQueryData<StudentInterface[]>(['students'], context?.previousStudents);
     },
     // обновляем данные в случаи успешного выполнения mutationFn: async (studentId: number) => deleteStudentApi(studentId),
     onSuccess: async (studentId: number, variables, { previousStudents }) => {
+      console.log('deleteStudentMutate: Успешно', studentId);
+      debugger;
       await queryClient.cancelQueries({ queryKey: ['students'] });
       // вариант 1 - запрос всех записей
       // refetch();
@@ -87,13 +93,18 @@ const useStudents = (): StudentsHookInterface => {
       });
       queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudents);
 
+      console.log('addStudentMutate: Мутация', newStudent);
+      debugger;
+
       return { previousStudents, updatedStudents };
     },
     onError: (err, variables, context) => {
-      console.log('>>> addStudentMutate  err', err);
+      console.log('addStudentMutate: Ошибка', err);
       queryClient.setQueryData<StudentInterface[]>(['students'], context?.previousStudents);
     },
     onSuccess: async (student: StudentInterface, variables, { previousStudents }) => {
+      console.log('addStudentMutate: Успешно', student);
+      debugger;
       await queryClient.cancelQueries({ queryKey: ['students'] });
       // вариант 1 - запрос всех записей
       // refetch();

@@ -9,10 +9,11 @@ import { deleteStudentApi } from '@/api/studentsApi';
 import { useMutation } from '@tanstack/react-query';
 import AddStudent, { FormFields } from './AddStudent/AddStudent';
 import { v4 as uuidv4 } from 'uuid';
+import useGroups from '@/hooks/useGroups';
 
 const Students = (): React.ReactElement => {
   const { students, addStudentMutate, deleteStudentMutate } = useStudents();
-
+  const { groups } = useGroups();
   async function addTest(): Promise<void> {
     await fetch(`${process.env.NEXT_PUBLIC_API}students/add-test`, {
       method: 'POST',
@@ -20,14 +21,20 @@ const Students = (): React.ReactElement => {
   }
 
   const addStudent = (studentFormField: FormFields): void => {
-    addStudentMutate({
+    debugger;
+    console.log('Добавление студента', studentFormField);
+    const student: StudentInterface = {
       id: -1,
       ...studentFormField,
+      group: groups.find(t => t.id === studentFormField.group?.id),
       uuid: uuidv4(),
-    });
-  }
+    };
+    addStudentMutate(student);
+  };
 
   const onDeleteHandler = (studentId: number): void => {
+    debugger;
+    console.log('Удаление студента', studentId);
     deleteStudentMutate(studentId);
   };
 
@@ -38,11 +45,10 @@ const Students = (): React.ReactElement => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>UUID</th>
             <th>Фамилия</th>
             <th>Имя</th>
             <th>Отчество</th>
-            <th>Номер группы</th>
+            <th>Группа</th>
             <th>Контакты</th>
             <th>Действия</th>
           </tr>

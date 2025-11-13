@@ -52,7 +52,7 @@ export const addRandomStudentsDb = async (amount: number = 10): Promise<StudentI
     const newStudent = await addStudentDb({
       ...fio,
       contacts: 'contact',
-      groupId: 1,
+      group: undefined,
       uuid: uuidv4(),
     });
     students.push(newStudent);

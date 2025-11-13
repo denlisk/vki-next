@@ -9,8 +9,8 @@ interface Props {
 
 const Student = ({ student, onDelete }: Props): React.ReactElement => {
   const onDeleteHandler = (): void => {
-    onDelete(student.id);
     student.isDeleted = true;
+    onDelete(student.id);
   };
 
   return (
@@ -28,16 +28,16 @@ const Student = ({ student, onDelete }: Props): React.ReactElement => {
         {student.firstName}
       </td>
       <td>
-        {student.middleName}
+        {student.middleName || ''}
       </td>
       <td>
-        {student.groupId}
+        {student.group?.name || '-'}
       </td>
       <td>
         {student.contacts}
       </td>
       <td>
-        <Link href={`/students/${student.id}`}>Открыть</Link>
+        <Link href={`students/${student.id}`}>Профиль</Link>
         <button onClick={onDeleteHandler}>Удалить</button>
       </td>
     </tr>
