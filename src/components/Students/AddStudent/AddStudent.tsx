@@ -1,17 +1,16 @@
 import type StudentInterface from '@/types/StudentInterface';
 import styles from './AddStudent.module.scss';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import useGroups from '@/hooks/useGroups';
-import GroupInterface from '@/types/GroupInterface';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import type GroupInterface from '@/types/GroupInterface';
 
-export type FormFields = Pick<StudentInterface, 'firstName' | 'lastName' | 'middleName' | 'group'>;
+export type FormFields = Pick<StudentInterface, 'FirstName' | 'LastName' | 'MiddleName' | 'GroupId'>;
 
 interface Props {
   onAdd: (studentForm: FormFields) => void;
+  groups: GroupInterface[];
 }
-const AddStudent = ({ onAdd }: Props): React.ReactElement => {
+const AddStudent = ({ onAdd, groups }: Props): React.ReactElement => {
   const { register, handleSubmit } = useForm<FormFields>();
-  const { groups } = useGroups();
 
   const onSubmit: SubmitHandler<FormFields> = (studentForm) => {
     onAdd(studentForm);
@@ -20,19 +19,19 @@ const AddStudent = ({ onAdd }: Props): React.ReactElement => {
   return (
     <form className={`${styles.AddStudent}`} onSubmit={handleSubmit(onSubmit)}>
       <span>Имя</span>
-      <input type="text" {...register('firstName', { required: true })} />
+      <input type="text" {...register('FirstName', { required: true })} />
       <span>Фамилия</span>
-      <input type="text" {...register('lastName', { required: true })} />
+      <input type="text" {...register('LastName', { required: true })} />
       <span>Отчество</span>
-      <input type="text" {...register('middleName')} />
+      <input type="text" {...register('MiddleName')} />
       <span>Группа</span>
-      <select {...register('group'), { required: true }}>
+      <select {...register('GroupId')}>
         <option value={undefined}>
           Без группы
         </option>
         {groups.map((group: GroupInterface) => (
-          <option key={group.id} value={JSON.stringify(group)}>
-            {group.name}
+          <option key={group.Id} value={group.Id}>
+            {group.Name}
           </option>
         ))}
       </select>

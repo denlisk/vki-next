@@ -4,7 +4,6 @@ import useGroups from '@/hooks/useGroups';
 import type GroupInterface from '@/types/GroupInterface';
 import styles from './Groups.module.scss';
 import type StudentInterface from '@/types/StudentInterface';
-import Student from '../Students/Student';
 import Link from 'next/link';
 
 const Groups = (): React.ReactElement => {
@@ -13,15 +12,15 @@ const Groups = (): React.ReactElement => {
   return (
     <div className={styles.Groups}>
       {groups.map((group: GroupInterface) => (
-        <div key={group.id}>
+        <div key={group.Id}>
           <h2>
             Группа &nbsp;
-            {group.name}
+            {group.Name}
           </h2>
           <div>
-            {group.contacts}
+            {group.Contacts}
           </div>
-          {group.students
+          {group.Students
             ? (
               <table className={styles.Students}>
                 <thead>
@@ -34,22 +33,22 @@ const Groups = (): React.ReactElement => {
                   </tr>
                 </thead>
                 <tbody>
-                  {group.students?.map((student: StudentInterface) => (
-                    <tr key={student.id || student.uuid} className={`${student.isDeleted ? '--isDeleted' : student.isNew ? '--isNew' : ''} `}>
+                  {group.Students.map((student: StudentInterface) => (
+                    <tr key={student.Id || student.UUID} className={`${student.IsDeleted ? '--isDeleted' : ''} `}>
                       <td>
-                        {student.lastName}
+                        {student.LastName}
                       </td>
                       <td>
-                        {student.firstName}
+                        {student.FirstName}
                       </td>
                       <td>
-                        {student.middleName}
+                        {student.MiddleName}
                       </td>
                       <td>
-                        {student.contacts}
+                        {student.Contacts}
                       </td>
                       <td>
-                        <Link href={`students/${student.id}`}>Профиль</Link>
+                        <Link href={`students/${student.Id}`}>Профиль</Link>
                       </td>
                     </tr>
                   ))}

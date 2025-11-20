@@ -17,7 +17,7 @@ const useStudents = (): StudentsHookInterface => {
   const queryClient = useQueryClient();
 
   const { data, refetch } = useQuery({
-    queryKey: ['students'],
+    queryKey: ['student'],
     queryFn: () => getStudentsApi(),
     enabled: false,
   });
@@ -40,7 +40,7 @@ const useStudents = (): StudentsHookInterface => {
       // помечаем удаляемую запись
       updatedStudents = updatedStudents.map((student: StudentInterface) => ({
         ...student,
-        ...(student.id === studentId ? { isDeleted: true } : {}),
+        ...(student.id === studentId ? { IsDeleted: true } : {}),
       }));
       // обновляем данные в TanStackQuery
       queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudents);
@@ -89,7 +89,6 @@ const useStudents = (): StudentsHookInterface => {
 
       updatedStudents.push({
         ...newStudent,
-        isNew: true,
       });
       queryClient.setQueryData<StudentInterface[]>(['students'], updatedStudents);
 

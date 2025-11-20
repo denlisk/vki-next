@@ -1,15 +1,15 @@
 import type { Group } from "@/db/entity/Group.entity";
 
 interface StudentInterface {
-  id: number;
-  uuid?: string;
-  firstName: string;
-  lastName: string;
-  middleName?: string;
-  contacts?: string;
-  isDeleted?: boolean;
-  isNew?: boolean;
-  group?: Group;
+  Id: number;
+  UUID?: string;
+  FirstName: string;
+  LastName: string;
+  MiddleName?: string;
+  Contacts?: string;
+  IsDeleted: boolean;
+  Group?: Group;
+  GroupId?: number;
 };
 
 export default StudentInterface;

@@ -1,17 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, type Relation } from 'typeorm';
 import { Student } from './Student.entity';
 
 @Entity()
 export class Group {
   @PrimaryGeneratedColumn()
-  id!: number;
+  Id!: number;
 
   @Column()
-  name!: string;
+  Name!: string;
 
-  @Column()
-  contacts!: string;
+  @Column({ nullable: true })
+  Contacts?: string;
 
-  @OneToMany(() => Student, student => student.group)
-  students!: Student[];
+  @OneToMany(() => Student, student => student.Group)
+  Students!: Relation<Student>[];
 }

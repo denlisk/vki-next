@@ -9,35 +9,35 @@ interface Props {
 
 const Student = ({ student, onDelete }: Props): React.ReactElement => {
   const onDeleteHandler = (): void => {
-    student.isDeleted = true;
-    onDelete(student.id);
+    student.IsDeleted = true;
+    onDelete(student.Id);
   };
 
   return (
-    <tr className={`${styles.Student} ${student.isDeleted ? '--isDeleted' : student.isNew ? '--isNew' : ''} `}>
+    <tr className={`${styles.Student} ${student.IsDeleted ? '--isDeleted' : ''} `}>
       <td>
-        {student.id}
+        {student.Id}
       </td>
       <td>
-        {student.uuid}
+        {student.UUID}
       </td>
       <td>
-        {student.lastName}
+        {student.LastName}
       </td>
       <td>
-        {student.firstName}
+        {student.FirstName}
       </td>
       <td>
-        {student.middleName || ''}
+        {student.MiddleName || ''}
       </td>
       <td>
-        {student.group?.name || '-'}
+        {student.Group?.Name || '-'}
       </td>
       <td>
-        {student.contacts}
+        {student.Contacts || '-'}
       </td>
       <td>
-        <Link href={`students/${student.id}`}>Профиль</Link>
+        <Link href={`students/${student.Id}`}>Профиль</Link>
         <button onClick={onDeleteHandler}>Удалить</button>
       </td>
     </tr>

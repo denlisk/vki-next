@@ -1,9 +1,9 @@
+import { dbInit } from '@/db/AppDataSource';
 import { addStudentDb, getStudentsDb } from '@/db/studentDb';
-import StudentInterface from '@/types/StudentInterface';
-import { NextApiRequest } from 'next';
-import { NextRequest } from 'next/server';
+import { type NextRequest } from 'next/server';
 
 export async function GET(): Promise<Response> {
+  await dbInit();
   const students = await getStudentsDb();
 
   return new Response(JSON.stringify(students), {
@@ -14,11 +14,13 @@ export async function GET(): Promise<Response> {
 };
 
 export async function POST(req: NextRequest): Promise<Response> {
+  await dbInit();
   const student = await req.json();
-  delete student['id'];
-  await addStudentDb(student);
+  delete student['Id'];
+  const newStudent = await addStudentDb(student);
 
-  return new Response(JSON.stringify(student), {
+  return new Response(JSON.stringify(newStudent), {
+    status: 201,
     headers: {
       'Content-Type': 'application/json',
     },

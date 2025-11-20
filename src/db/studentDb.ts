@@ -11,11 +11,24 @@ const studentRepository = AppDataSource.getRepository(Student);
  * @returns Promise<StudentInterface[]>
  */
 export const getStudentsDb = async (): Promise<StudentInterface[]> => {
-  return await studentRepository.find();
+  const students = await studentRepository.find({ relations: ['Group'] });
+  return students as StudentInterface[];
 };
 
 /**
- * Удаления студента
+ * Получение студента по id
+ * @param id id студента
+ * @returns Promise<Student | null>
+ */
+export const getStudentByIdDb = async (id: number): Promise<Student | null> => {
+  return await studentRepository.findOne({
+    where: { Id: id },
+    relations: ['Groups'],
+  });
+};
+
+/**
+ * Удаление студента
  * @param studentId ИД удаляемого студента
  * @returns Promise<number>
  */
@@ -29,7 +42,7 @@ export const deleteStudentDb = async (studentId: number): Promise<number> => {
  * @param studentField поля студента
  * @returns Promise<StudentInterface>
  */
-export const addStudentDb = async (studentFields: Omit<StudentInterface, 'id'>): Promise<StudentInterface> => {
+export const addStudentDb = async (studentFields: Omit<StudentInterface, 'Id'>): Promise<StudentInterface> => {
   const student = new Student();
   const newStudent = await studentRepository.save({
     ...student,
@@ -51,9 +64,8 @@ export const addRandomStudentsDb = async (amount: number = 10): Promise<StudentI
 
     const newStudent = await addStudentDb({
       ...fio,
-      contacts: 'contact',
-      group: undefined,
-      uuid: uuidv4(),
+      Contacts: 'contact',
+      IsDeleted: false,
     });
     students.push(newStudent);
   }

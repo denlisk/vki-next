@@ -1,30 +1,33 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, type Relation, JoinColumn } from 'typeorm';
 import { Group } from './Group.entity';
 
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn()
-  id!: number;
+  Id!: number;
 
-  @Column({ default: '' })
-  uuid?: string;
-
-  @Column()
-  firstName!: string;
+  @Column({ nullable: true })
+  UUID?: string;
 
   @Column()
-  lastName!: string;
+  FirstName!: string;
 
   @Column()
-  middleName?: string;
+  LastName!: string;
 
-  @Column({ default: '' })
-  contacts!: string;
+  @Column({ nullable: true })
+  MiddleName?: string;
 
-  @Column()
-  groupId!: number;
+  @Column({ nullable: true })
+  Contacts?: string;
 
-  @ManyToOne(() => Group, { nullable: true })
-  @JoinColumn({ name: 'groupId' })
-  group?: Group;
+  @Column({ nullable: true })
+  GroupId?: number;
+
+  @ManyToOne(() => Group, group => group.Students)
+  @JoinColumn({ name: 'GroupId' })
+  Group?: Relation<Group>;
+
+  @Column({ default: false })
+  IsDeleted!: boolean;
 }
