@@ -10,7 +10,7 @@ const useGroups = (): GroupsHookInterface => {
   // const queryClient = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: ['Groups'],
+    queryKey: ['groups'],
     queryFn: () => getGroupsApi(),
     enabled: false,
   });
