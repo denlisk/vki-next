@@ -1,3 +1,4 @@
+'use client';
 import styles from './Student.module.scss';
 import BackToStudents from './BackToStudents/BackToStudents';
 import useStudents from '@/hooks/useStudents';
