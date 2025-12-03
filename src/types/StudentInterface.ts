@@ -1,4 +1,4 @@
-import type { Group } from "@/db/entity/Group.entity";
+import type { Group } from '@/db/entity/Group.entity';
 
 interface StudentInterface {
   Id: number;

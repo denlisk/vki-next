@@ -2,7 +2,6 @@ import { Student } from './entity/Student.entity';
 import type StudentInterface from '@/types/StudentInterface';
 import getRandomFio from '@/utils/getRandomFio';
 import AppDataSource from './AppDataSource';
-import { v4 as uuidv4 } from 'uuid';
 
 const studentRepository = AppDataSource.getRepository(Student);
 

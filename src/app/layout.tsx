@@ -16,7 +16,6 @@ import { META_DESCRIPTION, META_TITLE } from '@/constants/meta';
 import type StudentInterface from '@/types/StudentInterface';
 import { getStudentsApi } from '@/api/studentsApi';
 import { verifyAccessToken } from '@/utils/jwt';
-import UserInterface from '@/types/UserInterface';
 
 export const metadata: Metadata = {
   title: META_TITLE,
