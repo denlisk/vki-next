@@ -11,12 +11,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color: #ff6060;
-    --color2: #ff6060;
+    --color: #d8d8d8;
+    --color2: #000;
     --color3: #f00;
-    --background: #355869;
-    --background2: #3b4a5f;
-    --background3: #3b4a5f;
+    --background: #000;
+    --background2: #1e1e1e;
+    --background3: #bababa;
   }
 }
 
@@ -64,10 +64,64 @@ body {
   // }
 }
 
+input,
+select {
+  font-family: PTSans;
+  // color: var(--color);
+  // background-color: var(--background);
+  font-size: 18px;
+}
+
 @mixin commons {
   font-family: PTSans;
   color: var(--item-color);
   font-weight: 500;
+}
+
+input,
+select {
+  font-size: 18px;
+}
+
+@mixin commons {
+  color: var(--item-color);
+  font-weight: 500;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: var(--color) solid 1px;
+
+  @media #{main.$mob} {
+    font-size: main.vwMax(14px);
+    padding: main.vwMax(10px);
+    border-radius: main.vwMax(10px);
+  }
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: var(--color);
+  color: var(--color2);
+  font-size: 1rem;
+  font-weight: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  @media #{main.$mob} {
+    font-size: main.vwMax(14px);
+    padding: main.vwMax(10px);
+    border-radius: main.vwMax(10px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 h1 {
@@ -114,5 +168,10 @@ h4 {
 }
 
 a {
-  text-decoration: none;
+  &:link {
+    color: var(--color);
+  }
+  &:visited {
+    color: var(--color);
+  }
 }
