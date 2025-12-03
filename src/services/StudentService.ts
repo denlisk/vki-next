@@ -14,7 +14,7 @@ export class StudentService {
   }
 
   async getStudents(): Promise<StudentInterface[]> {
-    const students = await this.repository.find({ relations: ['group'] });
+    const students = await this.repository.find({ relations: ['Group'] });
     return students as StudentInterface[];
   }
 
