@@ -30,7 +30,7 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
   // выполняется на сервере - загрузка групп
   let groups: GroupInterface[];
   await queryClient.prefetchQuery({
-    queryKey: ['groups'],
+    queryKey: ['Groups'],
     queryFn: async () => {
       groups = await getGroupsApi();
       console.log('Groups', groups);
@@ -41,7 +41,7 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
   // выполняется на сервере - загрузка студентов
   let students: StudentInterface[];
   await queryClient.prefetchQuery({
-    queryKey: ['students'],
+    queryKey: ['Students'],
     queryFn: async () => {
       students = await getStudentsApi();
       console.log('Students', students);

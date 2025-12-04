@@ -11,12 +11,12 @@ export class GroupService {
   }
 
   async getGroups(): Promise<GroupInterface[]> {
-    const groups = await this.repository.find({ relations: ['Student'] });
+    const groups = await this.repository.find({ relations: ['Students'] });
     return groups as GroupInterface[];
   }
 
   async getGroupsById(Id: number): Promise<GroupInterface> {
-    const groups = await this.repository.findOne({ relations: ['Student'], where: { Id } });
+    const groups = await this.repository.findOne({ relations: ['Students'], where: { Id } });
     return groups as GroupInterface;
   }
 
