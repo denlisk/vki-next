@@ -34,7 +34,7 @@ const config: DataSourceOptions = {
     }),
   synchronize: process.env.NODE_ENV !== 'production',
   migrationsRun: process.env.NODE_ENV === 'production',
-  logging: false,
+  logging: true,
   entities: [Student, Group, User],
 };
 
