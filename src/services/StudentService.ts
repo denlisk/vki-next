@@ -14,14 +14,14 @@ export class StudentService {
   }
 
   async getStudents(): Promise<StudentInterface[]> {
-    const students = await this.repository.find({ relations: ['Group'] });
+    const students = await this.repository.find({ relations: ['group'] });
     return students as StudentInterface[];
   }
 
   async getStudentById(Id: number): Promise<Student | null> {
     return await this.repository.findOne({
       where: { Id: Id },
-      relations: ['Group'],
+      relations: ['group'],
     }) as Student | null;
   }
 
