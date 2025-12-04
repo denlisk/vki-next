@@ -2,21 +2,21 @@
 
 :root {
   --color: #272727;
-  --color2: #fff;
+  --color2: #2ca34f;
   --color3: #f00;
-  --background: #fff;
+  --background: #e4e4e4;
   --background2: #e1e1e1;
-  --background3: #434343;
+  --background3: #636363;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color: #ff6060;
-    --color2: #ff6060;
-    --color3: #f00;
-    --background: #355869;
-    --background2: #3b4a5f;
-    --background3: #3b4a5f;
+    --color: #ffffff;
+    --color2: #a6a6a6;
+    --color3: #ff0000;
+    --background: #1e2c30;
+    --background2: #294f36;
+    --background3: #1e2c30;
   }
 }
 
