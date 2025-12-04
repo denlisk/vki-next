@@ -4,16 +4,19 @@ import type GroupInterface from '@/types/GroupInterface';
 
 export class GroupService {
   private get repository(): ReturnType<typeof AppDataSource.getRepository> {
+    if (!AppDataSource.isInitialized) {
+      throw new Error('AppDataSource is not initialized');
+    }
     return AppDataSource.getRepository(Group);
   }
 
   async getGroups(): Promise<GroupInterface[]> {
-    const groups = await this.repository.find({ relations: ['students'] });
+    const groups = await this.repository.find({ relations: ['Students'] });
     return groups as GroupInterface[];
   }
 
   async getGroupsById(Id: number): Promise<GroupInterface> {
-    const groups = await this.repository.findOne({ relations: ['students'], where: { Id } });
+    const groups = await this.repository.findOne({ relations: ['Students'], where: { Id } });
     return groups as GroupInterface;
   }
 
